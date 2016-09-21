@@ -4,45 +4,63 @@ import java.util.*;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        Map<Character, Integer> freqMap = new HashMap<>();
-        String data;
-        int testCase;
         Scanner in = new Scanner(System.in);
+        int tc;
+        int[] frequency = new int[26];
+        String text;
 
-        while(in.hasNext()) {
-            testCase = in.nextInt();
-            in.nextLine(); // suppresses the new line
+        tc = in.nextInt();
+        in.nextLine();
 
-            for(int i = 0; i < testCase; i++) {
-                data = in.nextLine();
+        for(int i = 0; i < tc; i++) {
+            text = in.nextLine().replace(" ", "").toLowerCase();
+            int len = text.length();
+            Arrays.fill(frequency, 0);
 
-                // generate the freqMap
-                for(char c = 'a'; c <= 'z'; c++) {
-                    freqMap.put(c, 0);
+            for(int j = 0; j < len; j++) {
+                char c = text.charAt(j);
+                if(Character.isAlphabetic(c)) {
+                    int index = getInd(c);
+                    frequency[index]++;
                 }
+            }
 
-                data = data.toLowerCase();
-                data = data.replaceAll(" ", "");
-                int len = data.length();
-//                System.out.println(data);
+//            System.out.println(Arrays.toString(frequency));
+            int[] temp = Arrays.copyOf(frequency, 26);
+            int maxData = getMax(temp);
+//            System.out.println(Arrays.toString(frequency));
+            printResult(frequency, maxData);
+        }
 
-                for(int j = 0; j < len; j++) {
-                    char c = data.charAt(j);
-                    freqMap.putIfAbsent(c, 1);
-                    freqMap.put(c, freqMap.get(c).intValue() + 1);
-                }
+        in.close();
+    }
 
-                // get max freq
-                int maxFreq = Collections.max(freqMap.values());
-                for(Map.Entry<Character, Integer> entry : freqMap.entrySet()) {
-                    if(entry.getValue() == maxFreq) {
-                        System.out.print(entry.getKey());
-                    }
-                }
-                System.out.println();
+    public static int getInd(char c) {
+        int index = c - 97;
+        return index;
+    }
 
-                freqMap.clear();
+    public static int getMax(int[] ar) {
+        int max = 0;
+        Arrays.sort(ar);
+        max = ar[ar.length - 1];
+
+        return max;
+    }
+
+    public static char indexChar(int x) {
+        char c = (char)(97 + x);
+        return c;
+    }
+
+    public static void printResult(int[] frequency, int max) {
+        int s = frequency.length;
+        for(int i = 0; i < s; i++) {
+            if(frequency[i] == max) {
+                char c = indexChar(i);
+                System.out.print(c);
             }
         }
+        System.out.println();
     }
 }
