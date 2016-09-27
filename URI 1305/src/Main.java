@@ -29,11 +29,12 @@ public class Main {
                         if(tokens[1].length() > cutOff.length()) {
                             a++;
                         }
-                        System.out.println(a);
+                        else a--;
+                        if(a > 0) System.out.println(a);
                     }
                 }
                 else {
-                    System.out.println(Integer.parseInt(data));
+                    //System.out.println(Integer.parseInt(data));
                 }
             }
         }
