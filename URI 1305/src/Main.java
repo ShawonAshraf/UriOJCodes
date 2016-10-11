@@ -1,41 +1,30 @@
 import java.io.IOException;
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Main {
 
     public static void main(String[] args) throws IOException {
         Scanner in = new Scanner(System.in);
-        String cutoffPattern = "^((0.)(\\d{4}))$";
-        String cutOff = "5000";
-        Pattern p = Pattern.compile(cutoffPattern);
-        String data;
+        String num;
+        String cutoff;
 
         while(in.hasNext()) {
-            data = in.nextLine().replaceAll(" ", "");
-            Matcher m = p.matcher(data);
+            num = in.nextLine();
+            cutoff = in.nextLine();
 
-            if(m.find()) { continue; }
+            if(num.contains(".")) {
+                double numValue = Double.parseDouble(num);
+                double cutoffValue = Double.parseDouble(cutoff);
+
+                double fractionalValue = numValue - (int)numValue;
+
+                if(fractionalValue > cutoffValue) {
+                    System.out.println((int)numValue + 1);
+                }
+                else System.out.println((int)numValue);
+            }
             else {
-                if(data.contains(".")) {
-                    String[] tokens = data.split("[.]");
-
-                    if(tokens.length == 1) {
-                        System.out.println(Integer.parseInt(tokens[0]));
-                    }
-                    else if(tokens.length == 2 && !tokens[0].equals("")) {
-                        int a = Integer.parseInt(tokens[0]);
-                        if(tokens[1].length() > cutOff.length()) {
-                            a++;
-                        }
-                        else a--;
-                        if(a > 0) System.out.println(a);
-                    }
-                }
-                else {
-                    //System.out.println(Integer.parseInt(data));
-                }
+                System.out.println(num);
             }
         }
 
