@@ -15,13 +15,13 @@ numDict = {"one": 1, "two": 2, "three": 3}
 
 testCases = int(input())
 for i in range(testCases):
-    num = input()
+    num = input().strip()
     l = len(num)
 
     if(l == 3):
-        if(getErrorPercentage(num, "one") == (1 / 3)):
+        if(getErrorPercentage(num, "one") == (1 / 3) or num == "one"):
             print(numDict["one"])
-        else:
+        elif(getErrorPercentage(num, "two") == (1 / 3) or num == "two"):
             print(numDict["two"])
     elif(l == 5):
         print(numDict["three"])
