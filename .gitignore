@@ -1,6 +1,14 @@
 
 # Created by https://www.gitignore.io/api/eclipse,intellij,pycharm,visualstudio,visualstudiocode,c++,java,python
 
+#my own test files
+test.py
+Test.java
+test.cpp
+
+#data files
+data.txt
+
 ### Eclipse ###
 
 .metadata
