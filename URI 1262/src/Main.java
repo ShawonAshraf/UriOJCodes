@@ -18,16 +18,24 @@ public class Main {
             int r_count = 0;
             int w_count = 0;
 
-            for (int i = 0; i < l; i++) {
-                char op = trace.charAt(i);
+            Stack<Character> s = new Stack<>();
 
-                if (op == 'R') r_count++;
-                else w_count++;
+            for (int i = 0; i < l; i++) {
+                char c = trace.charAt(i);
+
+                if (c == 'W' && s.isEmpty()) {
+                    w_count++;
+                } else if(c == 'W' && !s.isEmpty()) {
+                    r_count += (int) Math.ceil((double) s.size() / processes);
+                    w_count++;
+                    s.clear();
+                } else {
+                    s.push(c);
+                }
             }
 
-            double r_d = (double) r_count;
-            int r = (int)(Math.ceil(r_d % processes));
-            cycleCount = r + w_count;
+            cycleCount = r_count + w_count + (int) Math.ceil((double) s.size() / processes);
+            s.clear();
 
             System.out.println(cycleCount);
         }
