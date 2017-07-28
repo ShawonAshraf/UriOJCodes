@@ -49,7 +49,7 @@ public class Main {
 
             list.forEach(System.out::println);
             list.clear();
-            
+
             System.out.println();
 
         }
